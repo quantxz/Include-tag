@@ -20,9 +20,12 @@ class Include {
                 setTimeout(() => {
                     const exportElement = document.querySelector('[type="export"]');
                     const exportStyleLinks = document.querySelectorAll('[type="ExportStyle"]');
+                    const exportScripts = document.querySelectorAll('[type="ExportScript"]');
 
                     // Limpa o conteúdo atual de element
                     element.innerHTML = '';
+
+
                     if (exportStyleLinks) {
                         const headElement = document.createElement('head');
                         exportStyleLinks.forEach(link => {
@@ -35,6 +38,13 @@ class Include {
                     exportElement.childNodes.forEach(childNode => {
                         element.appendChild(childNode.cloneNode(true));
                     });
+
+                    exportScripts.forEach(script => {
+                        const scriptElement = document.createElement('script');
+                        scriptElement.textContent = script.textContent;
+                        document.body.appendChild(scriptElement);
+                    });
+                    
                 }, 1);
             })
             .catch(error => {

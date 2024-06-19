@@ -33,7 +33,7 @@
 </body>
 ```
 
-* ADENDO ❗❗
+* ADENDOS ❗❗
   * Se o trecho de código exportado estiver sendo estilizado no próprio arquivo através de links ou da tag style, é necessário englobá-lo em uma tag include com o tipo ExportStyle. Como no exemplo abaixo:
 ```
 <head>
@@ -49,6 +49,19 @@
     <include type="export">
        ...inclua aqui tudo que deseja exportar 
     </include>
+</body>
+```
+    * Se o trecho for um script coloque ele edntro de um include com o type ExportScript como no exemplo abaixo:
+```
+<body>
+    <include type="export">
+       ...inclua aqui tudo que deseja exportar 
+    </include>
+    <include type="ExportScript">
+        <script>
+            seu script
+        </script>
+    </include> 
 </body>
 ```
 

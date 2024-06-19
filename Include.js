@@ -15,14 +15,27 @@ class Include {
                 return response.text();
             })
             .then(data => {
-                element.innerHTML = data
+                element.innerHTML = data;
+
                 setTimeout(() => {
                     const exportElement = document.querySelector('[type="export"]');
-                    element.innerHTML = ''
+                    const exportStyleLinks = document.querySelectorAll('[type="ExportStyle"]');
+
+                    // Limpa o conteúdo atual de element
+                    element.innerHTML = '';
+                    if (exportStyleLinks) {
+                        const headElement = document.createElement('head');
+                        exportStyleLinks.forEach(link => {
+                            headElement.appendChild(link.cloneNode(true));
+                        })
+                        element.appendChild(headElement);
+                    }
+
+                    // Adiciona os filhos de exportElement
                     exportElement.childNodes.forEach(childNode => {
-                        element.appendChild(childNode.cloneNode(true))
-                    })
-                }, 1)
+                        element.appendChild(childNode.cloneNode(true));
+                    });
+                }, 1);
             })
             .catch(error => {
                 console.error('Erro ao carregar o HTML:', error);

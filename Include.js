@@ -40,11 +40,22 @@ class Include {
                     });
 
                     exportScripts.forEach(script => {
-                        const scriptElement = document.createElement('script');
-                        scriptElement.textContent = script.textContent;
-                        document.body.appendChild(scriptElement);
-                    });
+                        // Verifica se já existe um script com o mesmo conteúdo
+                        let scriptAlreadyExists = false;
+                        document.querySelectorAll('script').forEach(existingScript => {
+                            if (existingScript.textContent.trim() === script.textContent.trim()) {
+                                scriptAlreadyExists = true;
+                                return;
+                            }
+                        });
                     
+                        if (!scriptAlreadyExists) {
+                            const scriptElement = document.createElement('script');
+                            scriptElement.textContent = script.textContent;
+                            document.body.appendChild(scriptElement);
+                        }
+                    });
+
                 }, 1);
             })
             .catch(error => {
